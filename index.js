@@ -16,7 +16,15 @@ app.get('/about/:praOb?', function(req, res){
     
 });
 
+app.get('/canal/youtube', function(req, res){
+    const canal = req.query['canal'];
 
+    if(!canal){
+        res.send('Nenhum canal fornecido');
+    }else{
+        res.send('Bem vindo ao  ' + canal);
+    }
+})
 
 
 app.listen(4000, function(error){
