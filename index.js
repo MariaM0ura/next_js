@@ -1,35 +1,22 @@
-const express = require('express');
-const app = express();
+function enviarEmail(corpo, para, callback) {
+    setTimeout(() => {
+        var deuErro = true;
 
-app.get('/', function(req, res){
-    res.send('this is a function that will run when the user visits the home page');
-})
+        if(deuErro) {
+            callback(5, "Deu erro");
+        }else{
+            callback();
+        }
+      }, 2000);
+}
 
-app.get('/about/:praOb?', function(req, res){
-    const praOb = req.params.praOb;
-
-    if(!praOb){
-        res.send('<h1>Sem paramentro ')
+console.log("Inicio do envio do email");
+enviarEmail("Oi, tudo bem?", "Kaiky", (time, erro) => {
+    if(erro == undefined) {
+        console.log("Tudo certo");
+        console.log(`tempo: ${time}s`);
     }else{
-        res.send('<h1>O paramentro é  ' + praOb + '</h1>');
-    }
-    
-});
-
-app.get('/canal/youtube', function(req, res){
-    const canal = req.query['canal'];
-
-    if(!canal){
-        res.send('Nenhum canal fornecido');
-    }else{
-        res.send('Bem vindo ao  ' + canal);
+        console.log("Deu erro");
     }
 })
-
-
-app.listen(4000, function(error){
-    if(error){
-        console.log('Error running the server');
-    }
-    console.log('Server is running on port', 4000);
-})
+console.log("Fim do envio do email");
