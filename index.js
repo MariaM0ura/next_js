@@ -16,11 +16,36 @@ function enviarEmail(corpo, para) {
   });
 }
 
-enviarEmail("Oi! Tudo bem?").then((dados) => {   
-    console.log("O e-mail foi enviado com sucesso!");
-    console.log(dados.time);
-    console.log(dados.to);
-    }).catch((erro) => {
-    console.log("O e-mail não pode ser enviado." + erro);
-    }
-);
+function pegarUsuarios(){
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve([
+                {name: "Victor", lang: "JS"},
+                {name: "Maria", lang: "Python"},
+                {name: "Ana", lang: "JS"},
+            ]);
+        }, 3000);
+    });
+}
+
+async function principal() {
+    var usuariosAwait = await pegarUsuarios();
+    console.log(usuariosAwait);    
+}
+
+principal();
+
+//ou 
+
+pegarUsuarios().then((usuarios) => {
+    console.log(usuarios);
+});
+
+// enviarEmail("Oi! Tudo bem?").then((dados) => {   
+//     console.log("O e-mail foi enviado com sucesso!");
+//     console.log(dados.time);
+//     console.log(dados.to);
+//     }).catch((erro) => {
+//     console.log("O e-mail não pode ser enviado." + erro);
+//     }
+// );
