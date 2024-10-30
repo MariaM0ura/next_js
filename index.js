@@ -1,22 +1,19 @@
-function enviarEmail(corpo, para, callback) {
+function enviarEmail(corpo, para) {
+  return new Promise((resolve, reject) => {
     setTimeout(() => {
-        var deuErro = true;
-
-        if(deuErro) {
-            callback(5, "Deu erro");
-        }else{
-            callback();
-        }
-      }, 2000);
+      var deuErro = true;
+      if (!deuErro) {
+        resolve(); // Promessa OK!
+      } else {
+        reject(); // Foi mal, deu erro!
+      }
+    }, 4000);
+  });
 }
 
-console.log("Inicio do envio do email");
-enviarEmail("Oi, tudo bem?", "Kaiky", (time, erro) => {
-    if(erro == undefined) {
-        console.log("Tudo certo");
-        console.log(`tempo: ${time}s`);
-    }else{
-        console.log("Deu erro");
+enviarEmail("Oi! Tudo bem?").then(() => {   
+    console.log("O e-mail foi enviado com sucesso!");
+    }).catch(() => {
+    console.log("O e-mail não pode ser enviado.");
     }
-})
-console.log("Fim do envio do email");
+);
